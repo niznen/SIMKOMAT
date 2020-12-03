@@ -1,0 +1,23 @@
+﻿@using System.Web.Optimization
+@{
+    ViewBag.Title = "Payment";
+    var checkoutID = ViewBag.CheckoutID;
+    var orderID = ViewBag.orderId;
+}
+
+<div class="lebcontainer">
+    <img src="https://www.lebara.sa/static/media/lebara-logo.b1bfbc20.png" style="width:146px; height:auto; z-index:10" />
+    <div>Total Amount: SAR @ViewBag.Amount</div>
+    @Html.BeginForm(null, null, FormMethod.Post, new
+    {
+        role = "form",
+        @class = "paymentWidgets",
+        @action = "http://natheer.lebara.sa:2508/Home/Verify",
+        data_brands = "VISA MASTER MADA"
+    })
+</div>
+
+<script src="https://test.oppwa.com/v1/paymentWidgets.js?checkoutId=@checkoutID"></script>
+<script type="text/javascript">
+
+</script>

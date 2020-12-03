@@ -1,0 +1,46 @@
+﻿@using SelfSIMCard.Models
+@model SIMOrder
+
+@{
+    ViewBag.Title = "Register";
+}
+
+<div class="lebcontainer">
+    <img src="https://www.lebara.sa/static/media/lebara-logo.b1bfbc20.png" style="width:146px; height:auto; z-index:10" />
+    @using (Html.BeginForm())
+    {
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @Html.HiddenFor(m => m.MVNO_ID)
+        @Html.HiddenFor(m => m.OrderID)
+        @Html.HiddenFor(m => m.PaymentDone)
+        @Html.HiddenFor(m => m.Result)
+        @Html.HiddenFor(m => m.ChannelId)
+        @Html.HiddenFor(m => m.UserId)
+        @Html.HiddenFor(m => m.UserName)
+        @*<div class="form-group">
+                @Html.Label("name", "Name")
+                @Html.TextBox("name", "", new { placeholder = "Name" })
+            </div>*@
+        <div class="form-group">
+            <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3 text-left">
+                @Html.LabelFor(m => m.IdNumber)
+            </div>
+            <div class="col-lg-9 col-md-9 col-sm-9 col-xs-9">
+                @Html.TextBoxFor(m => m.IdNumber, "", new { placeholder = "ID Number" })
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3 text-left">
+                @Html.LabelFor(m => m.Nationality)
+            </div>
+            <div class="col-lg-9 col-md-9 col-sm-9 col-xs-9">
+                @Html.DropDownListFor(m => m.Nationality, ViewBag.nationalities as SelectList)
+            </div>
+        </div>
+        @*@<>label for="idcapture">ID Image</!--label>
+            <input type="file" accept="image/*;capture=camera" class="form-control" id="idcapture" placeholder="TAke a picture for ID">
+            <small id="idcapture" class="form-text text-muted">Using your phone camera.</small>*@
+        <input type="submit" class="btn btn-primary" value="Submit" />
+    }
+</div>
+

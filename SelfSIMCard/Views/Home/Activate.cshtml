@@ -1,0 +1,15 @@
+﻿
+@{
+    ViewBag.Title = "Activate";
+}
+
+<h2>Activate</h2>
+
+<iframe src="https://simreg.lebara.sa/" id="regPage" style="width: 100%; height: 100%"></iframe>
+<button id="showme">Show</button>
+
+<script type="text/javascript">
+    $("#showme").on("click", function () {
+        console.log($("#regPage").contents().find("body"));
+    });
+</script>

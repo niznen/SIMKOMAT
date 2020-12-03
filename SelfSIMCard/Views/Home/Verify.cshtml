@@ -1,0 +1,42 @@
+﻿
+@{
+    ViewBag.Title = "Verify";
+    var orderId = ViewBag.orderId;
+}
+
+<div class="lebcontainer">
+    <img src="https://www.lebara.sa/static/media/lebara-logo.b1bfbc20.png" style="width:146px; height:auto; z-index:10" />
+    <div id="qrcode" style="width:150px; height:150px; margin-top:15px;"></div>
+    <div>&nbsp;</div>
+    <div style="text-align:center">Scan the above code in the SIM Despenser Machine and wait until you automatically get redirected to activation page</div>
+</div>
+
+<script type="text/javascript">
+    var chk = setInterval(checkScan, 1000);
+    function checkScan() {
+        $.get(
+            "http://natheer.lebara.sa:2508/Home/CheckOrder",
+            function(data) {
+                if (data.startsWith("89")) {
+                    clearInterval(chk);
+                    $.get(
+                        "http://natheer.lebara.sa:2508/Home/UpdateOrder/?ICCID=" + data,
+                        function (newdate) {
+                            window.location.replace("http://10.200.101.26:8797/?SimOrderId=" + @orderId+"&ICCID=" + data);
+                        }
+                    );
+                }
+            }
+        );
+    }
+    var qrcode = new QRCode(document.getElementById("qrcode"), {
+        width: 150,
+        height: 150
+    });
+    $.get(
+        "http://natheer.lebara.sa:2508/Home/GetToken",
+        function (data) {
+            qrcode.makeCode(data);
+        }
+    );
+</script>
